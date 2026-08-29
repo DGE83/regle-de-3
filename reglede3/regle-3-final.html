@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>Règle de trois</title>
+<meta name="theme-color" content="#4f46e5">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<style>
+  :root {
+    --accent: #4f46e5;
+    --accent-light: #eef0ff;
+    --ink: #1e2230;
+    --ink-soft: #6b7280;
+    --line: #e2e4ec;
+    --bg: #f4f5f9;
+    --card: #ffffff;
+    --error: #dc2626;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 20px;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 24px 20px 20px;
+    box-shadow: 0 1px 3px rgba(20, 20, 43, 0.06), 0 8px 24px rgba(20, 20, 43, 0.06);
+    border: 1px solid var(--line);
+  }
+
+  .sentence {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin: 0;
+  }
+
+  .sentence + .sentence {
+    margin-top: 6px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .field {
+    width: 92px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-align: center;
+    color: var(--ink);
+    background: var(--accent-light);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 9px 6px;
+    outline: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    min-height: 44px;
+  }
+
+  .field::placeholder { color: #a3a8c3; font-weight: 500; }
+
+  .field:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .field.unknown {
+    background: transparent;
+    border: 2px dashed var(--line);
+    color: var(--ink-soft);
+  }
+
+  .result-box {
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--accent), #6d5bf5);
+    border-radius: 16px;
+    padding: 18px 20px;
+    text-align: center;
+    color: #fff;
+    min-height: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .result-box .label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+  }
+
+  .result-box .value {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    word-break: break-all;
+  }
+
+  .result-box.error {
+    background: #fef2f2;
+    color: var(--error);
+  }
+
+  .result-box.error .value {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .detail {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    min-height: 1.2em;
+  }
+
+  .detail strong { color: var(--ink); }
+
+  .reset-btn {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--accent);
+    background: var(--accent-light);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    min-height: 44px;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  .reset-btn:active {
+    background: #e2e5ff;
+    transform: scale(0.98);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.75rem;
+    color: #9ca0b5;
+  }
+
+  @media (max-width: 360px) {
+    .field { width: 78px; font-size: 0.98rem; }
+    .sentence { font-size: 0.98rem; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header>
+    <h1>Règle de trois</h1>
+    <p>Calcul de proportionnalité directe</p>
+  </header>
+
+  <div class="card">
+    <p class="sentence">
+      Pour
+      <input id="x" class="field" type="number" inputmode="decimal" step="any" placeholder="x">
+      on a
+      <input id="y" class="field" type="number" inputmode="decimal" step="any" placeholder="y">
+    </p>
+    <p class="sentence">
+      donc pour
+      <input id="a" class="field" type="number" inputmode="decimal" step="any" placeholder="a">
+      on a
+      <span id="b-display" class="field unknown">b</span>
+    </p>
+
+    <div id="result-box" class="result-box">
+      <span class="label">Résultat (b)</span>
+      <span id="result-value" class="value">—</span>
+    </div>
+
+    <p id="detail" class="detail"></p>
+
+    <button id="reset-btn" type="button" class="reset-btn">Réinitialiser</button>
+  </div>
+
+  <footer>b = (y × a) ÷ x</footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const inputs = {
+    x: document.getElementById('x'),
+    y: document.getElementById('y'),
+    a: document.getElementById('a'),
+  };
+  const resultBox = document.getElementById('result-box');
+  const resultValue = document.getElementById('result-value');
+  const detail = document.getElementById('detail');
+
+  function formatNumber(n) {
+    const rounded = Math.round(n * 100) / 100;
+    return rounded.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // Valeur stricte : accepte uniquement des nombres (avec , ou . comme séparateur décimal).
+  // Contrairement à parseFloat() seul, on rejette les chaînes du type "12abc" au lieu de les
+  // tronquer silencieusement en 12 — évite un résultat faux sans message d'erreur.
+  function readValue(field) {
+    const raw = inputs[field].value.trim();
+    if (raw === '') return null;
+    const normalized = raw.replace(',', '.');
+    if (!/^-?\d+(\.\d+)?$/.test(normalized)) return NaN;
+    const n = parseFloat(normalized);
+    return isNaN(n) ? NaN : n;
+  }
+
+  function showError(msg) {
+    resultBox.classList.add('error');
+    resultValue.textContent = msg;
+    detail.textContent = '';
+  }
+
+  function showEmpty() {
+    resultBox.classList.remove('error');
+    resultValue.textContent = '—';
+    detail.textContent = '';
+  }
+
+  // Construction du détail via DOM/textContent plutôt que innerHTML + template string :
+  // aucune interprétation HTML n'est possible sur les valeurs affichées.
+  function showDetail(x, y, a, b) {
+    detail.textContent = '';
+
+    const strongB = document.createElement('strong');
+    strongB.textContent = formatNumber(b);
+
+    detail.append(
+      'b = (' + formatNumber(y) + ' × ' + formatNumber(a) + ') ÷ ' + formatNumber(x) + ' = ',
+      strongB
+    );
+  }
+
+  function calculate() {
+    const x = readValue('x');
+    const y = readValue('y');
+    const a = readValue('a');
+
+    if (x === null || y === null || a === null) {
+      showEmpty();
+      return;
+    }
+    if (Number.isNaN(x) || Number.isNaN(y) || Number.isNaN(a)) {
+      showError('Merci de saisir uniquement des nombres.');
+      return;
+    }
+    if (x === 0) {
+      showError('x ne peut pas être égal à 0.');
+      return;
+    }
+
+    const b = (y * a) / x;
+
+    resultBox.classList.remove('error');
+    resultValue.textContent = formatNumber(b);
+    showDetail(x, y, a, b);
+  }
+
+  Object.values(inputs).forEach((input) => {
+    input.addEventListener('input', calculate);
+  });
+
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    Object.values(inputs).forEach((input) => { input.value = ''; });
+    showEmpty();
+    inputs.x.focus();
+  });
+
+  showEmpty();
+})();
+</script>
+
+</body>
+</html>
