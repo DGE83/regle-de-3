@@ -3,9 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-<title>Règle de trois</title>
+<title>Règle de Trois en Ligne – Simulateur Gratuit de Calcul</title>
+<meta name="description" content="Calculez une règle de trois en ligne gratuitement. Simulateur simple et rapide pour résoudre vos problèmes de proportionnalité directe (produit en croix).">
+<meta name="keywords" content="règle de trois, règle de 3, simulateur règle de trois, calculatrice proportionnalité, produit en croix, calcul en ligne gratuit">
+<meta name="robots" content="index, follow">
+<meta name="author" content="DGE83">
+<link rel="canonical" href="https://regle-de-3.netlify.app/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://regle-de-3.netlify.app/">
+<meta property="og:title" content="Règle de Trois en Ligne – Simulateur Gratuit de Calcul">
+<meta property="og:description" content="Calculez une règle de trois en ligne gratuitement. Simulateur simple et rapide pour résoudre vos problèmes de proportionnalité directe (produit en croix).">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Règle de Trois">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Règle de Trois en Ligne – Simulateur Gratuit de Calcul">
+<meta name="twitter:description" content="Calculez une règle de trois en ligne gratuitement. Simulateur simple et rapide pour résoudre vos problèmes de proportionnalité directe.">
+
 <meta name="theme-color" content="#4f46e5">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Règle de Trois - Simulateur",
+  "url": "https://regle-de-3.netlify.app/",
+  "description": "Calculateur en ligne gratuit de règle de trois (produit en croix) pour résoudre vos problèmes de proportionnalité directe.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Qu'est-ce qu'une règle de trois ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La règle de trois (ou règle de 3) est une méthode de calcul permettant de résoudre un problème de proportionnalité directe entre deux grandeurs, à partir de trois valeurs connues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment calculer une règle de trois ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On utilise le produit en croix : si x correspond à y, alors pour a on obtient b = (y × a) ÷ x. Ce simulateur calcule automatiquement le résultat dès que vous saisissez vos valeurs."
+      }
+    }
+  ]
+}
+</script>
 <style>
   :root {
     --accent: #4f46e5;
@@ -193,6 +255,34 @@
     color: #9ca0b5;
   }
 
+  .seo-content {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .seo-content h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 18px 0 6px;
+    color: var(--ink);
+  }
+
+  .seo-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .seo-content p {
+    margin: 0 0 4px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .seo-content strong {
+    color: var(--ink);
+  }
+
   @media (max-width: 360px) {
     .field { width: 78px; font-size: 0.98rem; }
     .sentence { font-size: 0.98rem; gap: 6px; }
@@ -204,7 +294,7 @@
 <div class="app">
   <header>
     <h1>Règle de trois</h1>
-    <p>Calcul de proportionnalité directe</p>
+    <p>Simulateur gratuit de calcul de proportionnalité directe</p>
   </header>
 
   <div class="card">
@@ -232,6 +322,18 @@
   </div>
 
   <footer>b = (y × a) ÷ x</footer>
+
+  <section class="seo-content">
+    <h2>Qu'est-ce qu'une règle de trois ?</h2>
+    <p>La <strong>règle de trois</strong> (ou règle de 3) est une méthode de calcul mathématique qui permet de résoudre un problème de proportionnalité directe entre deux grandeurs. Elle est très utilisée pour convertir des unités, calculer un prix, une quantité, un pourcentage ou un dosage de recette.</p>
+
+    <h2>Comment utiliser ce simulateur ?</h2>
+    <p>Renseignez les trois valeurs connues de votre problème (x, y et a) : le simulateur calcule instantanément la valeur inconnue b, selon la formule <strong>b = (y × a) ÷ x</strong>. Aucune inscription ni téléchargement : le calcul se fait directement dans votre navigateur.</p>
+
+    <h2>Questions fréquentes</h2>
+    <p><strong>Ce simulateur de règle de trois est-il gratuit ?</strong><br>Oui, il est 100&nbsp;% gratuit et fonctionne directement en ligne, sans création de compte.</p>
+    <p><strong>Pour quels calculs utiliser une règle de trois ?</strong><br>Conversions d'unités, calcul de prix au kilo, dosages de recettes, pourcentages, échelles de plans... la règle de trois s'applique à tout problème de proportionnalité directe.</p>
+  </section>
 </div>
 
 <script>
